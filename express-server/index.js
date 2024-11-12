@@ -3,6 +3,17 @@ const app = express();
 // middleware for parsing body into js object
 app.use(express.json());
 
+const requestLogger = (req, res, next) => {
+  console.log(`Request Method: ${req.method}`);
+  console.log(`Request URL: ${req.url}`);
+  console.log("Request body:", req.body);
+  console.log("------------");
+  next();
+};
+
+// utilize requestLogger middleware
+app.use(requestLogger);
+
 const port = 3001;
 
 let movies = [
